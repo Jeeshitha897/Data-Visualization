@@ -1,5 +1,5 @@
 pdfplumber
-docx
+python-docx
 pandas
 matplotlib
 wordcloud 
