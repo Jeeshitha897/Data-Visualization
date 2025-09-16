@@ -1,5 +1,5 @@
 import streamlit as st
-import fitz  # PyMuPDF
+import pdfplumber
 import docx
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -9,10 +9,10 @@ from collections import Counter
 
 # Text extraction functions
 def extract_text_from_pdf(file):
-    doc = fitz.open(stream=file.read(), filetype="pdf")
     text = ""
-    for page in doc:
-        text += page.get_text()
+    with pdfplumber.open(file) as pdf:
+        for page in pdf.pages:
+            text += page.extract_text() or ""
     return text
 
 def extract_text_from_docx(file):
